@@ -6,7 +6,7 @@ license = "MIT or Apache 2.0"
 repository = "https://github.com/Taha-Firoz/rfkillr"
 description = "A Rust library for interacting with the rfkill subsystem on Linux"
 readme = "README.md"
-keywords = ["rfkill", "linux", "system", "device", "control", "hardware", "bluetooth", "wifi"]
+keywords = ["rfkill", "linux", "system", "device", "hardware"]
 
 [dependencies]
 nix = "0.26.2"
