@@ -12,12 +12,10 @@ keywords = ["rfkill", "linux", "system", "device", "hardware"]
 nix = "0.26.2"
 anyhow = "1.0.44"
 tracing = "0.1.37"
-# Add any dependencies that are only needed for the "serialization" feature
 serde = { version = "1.0.160", optional = true }
 zvariant = { version = "3.12.0", optional = true }
 
 [features]
 serialization = ["serde", "zvariant"]
-# Add any other features here
 
 
