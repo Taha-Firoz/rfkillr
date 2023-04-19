@@ -1,10 +1,12 @@
 pub mod rfkill;
 use anyhow::Result;
+#[cfg(feature = "serialization")]
 use serde::Serialize;
+#[cfg(feature = "serialization")]
 use zvariant::{SerializeDict, Type};
 
-#[derive(Serialize, Debug, Clone, Copy, PartialEq, Type)]
-#[zvariant(signature = "s")]
+#[cfg_attr(feature = "serialization", derive(Serialize, Type), zvariant(signature = "s"))]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum RfkillType {
     All,
     Wlan,
@@ -121,8 +123,8 @@ impl CRfKillEvent {
     }
 }
 
-#[derive(Serialize, Debug, Clone, Copy, PartialEq, Type)]
-#[zvariant(signature = "s")]
+#[cfg_attr(feature = "serialization", derive(Serialize, Type), zvariant(signature = "s"))]
+#[derive( Debug, Clone, Copy, PartialEq,)]
 ///
 /// Enum mapping the `op` field in rfkill
 pub enum RfkillOperations {
@@ -145,8 +147,8 @@ impl TryFrom<u8> for RfkillOperations {
         }
     }
 }
-#[derive(SerializeDict, Type, Clone)]
-#[zvariant(signature = "a{sv}")]
+#[cfg_attr(feature = "serialization", derive(SerializeDict, Type), zvariant(signature = "a{sv}"))]
+#[derive(Clone)]
 /// Enum mapping the `op` field in rfkill in a more rusty
 /// accessible way
 pub struct RfKillEvent {
