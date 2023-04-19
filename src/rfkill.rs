@@ -8,7 +8,7 @@ use nix::sys::stat::Mode;
 use nix::unistd::{read, close};
 
 use crate::consts::{RFKILL_PATH, RFKILL_SYS_PATH};
-use crate::util::{CRfKillEvent, RFKILL_EVENT_SIZE, RfKillEvent};
+use crate::{CRfKillEvent, RFKILL_EVENT_SIZE, RfKillEvent};
 pub struct RfKill {
     pub rfkill_fd: i32
 }
@@ -19,6 +19,8 @@ impl RfKill{
         Ok(RfKill { rfkill_fd: fd })
     }
 
+    /// get name of rfkill device
+    /// e.g. hci0
     pub fn get_name(device_idx: u32) -> Result<String> {
         let mut name = [0u8; 128];
     
@@ -38,7 +40,8 @@ impl RfKill{
         Ok(name_string[..pos].to_string())
     }
     
-
+    /// returns all events made on rfkill since 
+    /// rfkill object was created
     pub fn read_event(&self, mut event: CRfKillEvent) -> Result<RfKillEvent> {
         let bytes_to_read = read(self.rfkill_fd, unsafe {
             std::slice::from_raw_parts_mut(
