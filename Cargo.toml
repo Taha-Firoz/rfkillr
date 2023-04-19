@@ -1,0 +1,14 @@
+[package]
+name = "rfkillr"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+nix = "0.26.2"
+anyhow = "1.0.44"
+serde = "1.0.160"
+tracing-subscriber = { version = "0.3.16", features = ["env-filter"] }
+tracing = "0.1.37"
+zvariant = "3.12.0"
